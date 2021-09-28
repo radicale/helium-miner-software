@@ -21,7 +21,7 @@ services:
     stop_signal: SIGINT
 
   packet-forwarder:
-    image: "67feb315ab530ed62b9d8236a118e4df5d1cd9c0eff5b1faeb82257ffbaa8597"
+    image: "nebraltd/hm-miner:ba81e0e1395afec6637be81cca0ef9afb6374c54"
     environment:
       - 'DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket'  
     privileged: true
