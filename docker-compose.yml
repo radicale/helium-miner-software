@@ -3,7 +3,7 @@ version: '2'
 services:
 
   gateway-config:
-    image: nebraltd/hm-config:cf305ef
+    image: radicale/hm-config:cf305ef
     depends_on:
       - dbus-session
       - diagnostics
@@ -25,7 +25,7 @@ services:
     stop_signal: SIGINT
 
   packet-forwarder:
-    image: nebraltd/hm-pktfwd:8d8de7d
+    image: radicale/hm-pktfwd:8d8de7d
     depends_on:
       - helium-miner
     restart: always
@@ -34,7 +34,7 @@ services:
       - pktfwdr:/var/pktfwd
 
   helium-miner:
-    image: nebraltd/hm-miner:arm64-d0961c2
+    image: radicale/hm-miner:arm64-d0961c2
     depends_on:
       - dbus-session
       - diagnostics
@@ -51,39 +51,40 @@ services:
     cap_add:
       - SYS_RAWIO
     devices:
-      - /dev/i2c-1:/dev/i2c-1
+    # TODO: Should be miner agnostic
+      - /dev/i2c-0:/dev/i2c-0
     restart: on-failure
     environment:
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/session/dbus/session_bus_socket
       - RELEASE_BUMPER=foobar
 
-  diagnostics:
-    image: nebraltd/hm-diag:c22a429
-    environment:
-      - FIRMWARE_VERSION=2021.12.09.0
-      - DIAGNOSTICS_VERSION=c22a429
-      - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
-    volumes:
-      - pktfwdr:/var/pktfwd
-      - miner-storage:/var/data
-    ports:
-      - "80:5000"
-    cap_add:
-      - SYS_RAWIO
-    devices:
-      - /dev/i2c-1:/dev/i2c-1
-    privileged: true
-    labels:
-      io.balena.features.sysfs: 1
-      io.balena.features.procfs: 1
-      io.balena.features.dbus: 1
+  # diagnostics:
+  #   image: nebraltd/hm-diag:c22a429
+  #   environment:
+  #     - FIRMWARE_VERSION=2021.12.09.0
+  #     - DIAGNOSTICS_VERSION=c22a429
+  #     - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+  #   volumes:
+  #     - pktfwdr:/var/pktfwd
+  #     - miner-storage:/var/data
+  #   ports:
+  #     - "80:5000"
+  #   cap_add:
+  #     - SYS_RAWIO
+  #   devices:
+  #     - /dev/i2c-1:/dev/i2c-1
+  #   privileged: true
+  #   labels:
+  #     io.balena.features.sysfs: 1
+  #     io.balena.features.procfs: 1
+  #     io.balena.features.dbus: 1
 
-  upnp:
-    image: nebraltd/hm-upnp:b575a2f
-    network_mode: host
-    restart: on-failure
-    volumes:
-      - pktfwdr:/var/pktfwd
+  # upnp:
+  #   image: nebraltd/hm-upnp:b575a2f
+  #   network_mode: host
+  #   restart: on-failure
+  #   volumes:
+  #     - pktfwdr:/var/pktfwd
 
   dbus-session:
     image: balenablocks/dbus:rpi-0.0.2
