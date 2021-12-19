@@ -51,7 +51,7 @@ jobs:
         if: success()
         with:
           balena_api_token: ${{secrets.BALENA_API_TOKEN_2}}
-          balena_command: "deploy radicale/helium-miner --logs --debug --nocache --build"
+          balena_command: "deploy gh_radicale/pisces --logs --debug --nocache --build"
 
   # commercial:
   #   runs-on: ubuntu-latest
