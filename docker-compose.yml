@@ -3,7 +3,7 @@ version: '2'
 services:
 
   gateway-config:
-    image: radicale/hm-config:cf305ef
+    image: radicale/hm-config:0af475a
     depends_on:
       - dbus-session
       - diagnostics
@@ -25,7 +25,7 @@ services:
     stop_signal: SIGINT
 
   packet-forwarder:
-    image: radicale/hm-pktfwd:8d8de7d
+    image: radicale/hm-pktfwd:b3af42a
     depends_on:
       - helium-miner
     restart: always
