@@ -37,7 +37,7 @@ services:
     image: radicale/hm-miner:arm64-b763760
     depends_on:
       - dbus-session
-      - diagnostics
+     # - diagnostics
     expose:
       - "1680"
       - "4467"
