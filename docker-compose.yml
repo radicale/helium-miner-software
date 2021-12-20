@@ -59,10 +59,10 @@ services:
       - RELEASE_BUMPER=foobar
 
   diagnostics:
-    image: radicale/hm-diag:2d4fc92
+    image: radicale/hm-diag:92f558d
     environment:
       - FIRMWARE_VERSION=2021.12.14.0
-      - DIAGNOSTICS_VERSION=2d4fc92
+      - DIAGNOSTICS_VERSION=92f558d
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
     volumes:
       - pktfwdr:/var/pktfwd
