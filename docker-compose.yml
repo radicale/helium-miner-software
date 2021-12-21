@@ -34,7 +34,7 @@ services:
       - pktfwdr:/var/pktfwd
 
   helium-miner:
-    image: radicale/hm-miner:arm64-b763760
+    image: radicale/hm-miner:arm64-90bb1c3
     depends_on:
       - dbus-session
       - diagnostics
