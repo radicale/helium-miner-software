@@ -3,7 +3,7 @@ version: '2'
 services:
 
   gateway-config:
-    image: radicale/hm-config:0af475a
+    image: radicale/hm-config:1a646f9
     depends_on:
       - dbus-session
       - diagnostics
