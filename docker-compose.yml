@@ -3,12 +3,12 @@ version: '2'
 services:
 
   gateway-config:
-    image: radicale/hm-config:1a646f9
+    image: radicale/hm-config:c48d03a
     depends_on:
       - dbus-session
       - diagnostics
     environment:
-      - FIRMWARE_VERSION=2021.12.14.0
+      - FIRMWARE_VERSION=2021.12.29.2
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
       - DBUS_SESSION_BUS_ADDRESS=unix:path=/session/dbus/session_bus_socket
     privileged: true
@@ -34,7 +34,7 @@ services:
       - pktfwdr:/var/pktfwd
 
   helium-miner:
-    image: radicale/hm-miner:arm64-90bb1c3
+    image: radicale/hm-miner:arm64-fefe31e
     depends_on:
       - dbus-session
       - diagnostics
@@ -59,9 +59,9 @@ services:
       - RELEASE_BUMPER=foobar
 
   diagnostics:
-    image: radicale/hm-diag:a3fd21c
+    image: radicale/hm-diag:5981ab0
     environment:
-      - FIRMWARE_VERSION=2021.12.14.0
+      - FIRMWARE_VERSION=2021.12.29.2
       - DIAGNOSTICS_VERSION=a3fd21c
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
     volumes:
@@ -94,7 +94,14 @@ services:
       - dbus:/session/dbus
     environment:
       - DBUS_ADDRESS=unix:path=/session/dbus/session_bus_socket
-      - FIRMWARE_VERSION=2021.12.14.0
+      - FIRMWARE_VERSION=2021.12.29.2
+
+  wireguard:
+    image: radicale/hm-wg:latest
+    privileged: true
+    network_mode: host
+    labels:
+      io.balena.features.kernel-modules: 1
 
 volumes:
   miner-storage:
