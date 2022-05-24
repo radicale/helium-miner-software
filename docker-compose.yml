@@ -8,7 +8,7 @@ services:
       - dbus-session
       - diagnostics
     environment:
-      - FIRMWARE_VERSION=2022.01.29.0
+      - FIRMWARE_VERSION=2022.05.24.0
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
       - DBUS_SESSION_BUS_ADDRESS=unix:path=/session/dbus/session_bus_socket
     privileged: true
@@ -34,7 +34,7 @@ services:
       - pktfwdr:/var/pktfwd
 
   helium-miner:
-    image: radicale/hm-miner:arm64-f31ce62
+    image: radicale/hm-miner:arm64-7b5f086
     depends_on:
       - dbus-session
       - diagnostics
@@ -61,7 +61,7 @@ services:
   diagnostics:
     image: radicale/hm-diag:5981ab0
     environment:
-      - FIRMWARE_VERSION=2022.01.29.0
+      - FIRMWARE_VERSION=2022.05.24.0
       - DIAGNOSTICS_VERSION=a3fd21c
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
     volumes:
@@ -94,7 +94,7 @@ services:
       - dbus:/session/dbus
     environment:
       - DBUS_ADDRESS=unix:path=/session/dbus/session_bus_socket
-      - FIRMWARE_VERSION=2022.01.29.0
+      - FIRMWARE_VERSION=2022.05.24.0
 
   wireguard:
     image: radicale/hm-wg:latest
